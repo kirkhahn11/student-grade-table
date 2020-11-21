@@ -1,7 +1,7 @@
 var tableElement = document.querySelector('.table')
-var header = document.querySelector('.header')
+var headerElement = document.querySelector('.header')
 
-var pageHeader = new PageHeader(header)
+var pageHeader = new PageHeader(headerElement)
 
 var gradeTable = new GradeTable(tableElement)
 
