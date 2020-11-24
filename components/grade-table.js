@@ -5,8 +5,12 @@ class GradeTable {
   }
   updateGrades(grades) {
     var tbody = this.tableElement.querySelector('tbody')
-    if(!tbody.lastChild){
-      noGrade.classList.remove('d-none')
+
+    if(!grades[0]){
+      noGradesElement.classList.remove('d-none')
+    }
+    if(grades[0]){
+      noGradesElement.classList.add('d-none')
     }
     while(tbody.lastChild){
       tbody.removeChild(tbody.lastChild)
