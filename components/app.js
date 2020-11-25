@@ -2,8 +2,8 @@ function getAverage(grades){
   var total = 0
   for(var i = 0; i < grades.length; i++){
     total = total += grades[i].grade
-    var avg = total/grades.length
   }
+  var avg = total / grades.length
   return avg
 }
 
@@ -68,7 +68,6 @@ class App {
     this.getGrades()
   }
   deleteGrade(id) {
-    console.log(id)
     $.ajax({
       headers: {
         "X-Access-Token": "NUEI5rKm"
