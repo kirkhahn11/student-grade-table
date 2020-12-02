@@ -1,10 +1,10 @@
-function getAverage(grades){
+function getAverage(){
   var total = 0
-  for(var i = 0; i < grades.length; i++){
-    total = total += grades[i].grade
+  for(var i = 0; i < gradeData.length; i++){
+    total = total += parseInt(gradeData[i].grade, 10)
   }
-  var avg = total / grades.length
-  return avg
+  var avg = total / gradeData.length
+  return avg.toFixed(2)
 }
 
 class App {
@@ -14,7 +14,7 @@ class App {
   handleGetGradesSuccess(grades){
     gradeData = grades
     this.gradeTable.updateGrades()
-    var gradeAverage = getAverage(grades)
+    var gradeAverage = getAverage()
     this.pageHeader.updateAverage(gradeAverage)
   }
   constructor(gradeTable, pageHeader, gradeForm, updateGradeForm) {
@@ -70,15 +70,20 @@ class App {
   handleCreateGradeError(error) {
     console.error(error)
   }
-  handleCreateGradeSuccess(){
-    this.getGrades()
+  handleCreateGradeSuccess(grades){
+    gradeData.push(grades)
+    var gradeAverage = getAverage()
+    this.pageHeader.updateAverage(gradeAverage)
+    this.gradeTable.updateGrades()
   }
   deleteGradeFromArray(id){
     for(var i = 0; i < gradeData.length; i++){
-      if(gradeData[i].id = id){
-        gradeData.splice(1, i)
+      if(gradeData[i].id === id){
+        gradeData.splice(i, 1)
       }
     }
+    var gradeAverage = getAverage()
+    this.pageHeader.updateAverage(gradeAverage)
     this.gradeTable.updateGrades()
   }
   deleteGrade(id) {
