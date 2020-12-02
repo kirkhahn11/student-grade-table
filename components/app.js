@@ -27,7 +27,7 @@ class App {
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this)
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this)
     this.pageHeader = pageHeader
-    this.gradeForm = gradeForm
+    this.addGradeForm = addGradeForm
     this.updateGradeForm = updateGradeForm
     this.handleUpdateGradeError = this.handleUpdateGradeError.bind(this)
     this.handleUpdateGradeSuccess = this.handleUpdateGradeSuccess.bind(this)
@@ -46,7 +46,7 @@ class App {
   }
   start(){
     this.getGrades()
-    this.gradeForm.onSubmit(this.createGrade)
+    this.addGradeForm.onSubmit(this.createGrade)
     this.updateGradeForm.onSubmitUpdate(this.updateGrade)
     this.gradeTable.onDeleteClick(this.deleteGrade)
   }

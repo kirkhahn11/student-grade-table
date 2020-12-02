@@ -47,9 +47,9 @@ class GradeTable {
     var updateButtonText = document.createTextNode('Update')
     updateButton.addEventListener('click', function() {
       updateFormAppear(),
-      updateElement.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value = data.name
-      updateElement.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value = data.course
-      updateElement.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.value = data.grade
+      updateElement.elements.name.value = data.name
+      updateElement.elements.course.value = data.course
+      updateElement.elements.grade.value = data.grade
       var dataId = data.id
       dataArray.push(dataId)
     })
