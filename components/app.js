@@ -76,7 +76,7 @@ class App {
     this.pageHeader.updateAverage(gradeAverage)
     this.gradeTable.updateGrades()
   }
-  deleteGradeFromArray(id){
+  deleteGradeSuccess(id){
     for(var i = 0; i < gradeData.length; i++){
       if(gradeData[i].id === id){
         gradeData.splice(i, 1)
@@ -93,7 +93,7 @@ class App {
       },
       type: "DELETE",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
-      success: this.deleteGradeFromArray(id),
+      success: this.deleteGradeSuccess(id),
       error: this.handleDeleteGradeError
     })
   }
@@ -115,14 +115,23 @@ class App {
         course: course,
         grade: grade
       },
-      success: this.handleUpdateGradeSuccess,
+      success: this.handleUpdateGradeSuccess(id, name, course, grade),
       error: this.handleUpdateGradeError
     })
   }
   handleUpdateGradeError(error){
     console.error(error)
   }
-  handleUpdateGradeSuccess(){
-    this.getGrades()
+  handleUpdateGradeSuccess(id, name, course, grade){
+    for (var i = 0; i < gradeData.length; i++) {
+      if (gradeData[i].id.toString() === id) {
+        gradeData[i].name = name
+        gradeData[i].course = course
+        gradeData[i].grade = grade
+      }
+    }
+    var gradeAverage = getAverage()
+    this.pageHeader.updateAverage(gradeAverage)
+    this.gradeTable.updateGrades()
   }
 }
