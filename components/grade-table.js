@@ -4,20 +4,20 @@ class GradeTable {
     this.noGradesElement = noGradesElement
     this.updateElement = updateElement
   }
-  updateGrades(grades) {
+  updateGrades() {
     var tbody = this.tableElement.querySelector('tbody')
 
-    if(!grades[0]){
+    if(!gradeData[0]){
       noGradesElement.classList.remove('d-none')
     }
-    if(grades[0]){
+    if(gradeData[0]){
       noGradesElement.classList.add('d-none')
     }
     while(tbody.lastChild){
       tbody.removeChild(tbody.lastChild)
     }
-    for(var i = 0; i < grades.length; i++){
-      tbody.append(this.renderGradeRow(grades[i], this.deleteGrade))
+    for(var i = 0; i < gradeData.length; i++){
+      tbody.append(this.renderGradeRow(gradeData[i], this.deleteGrade))
     }
   }
   onDeleteClick(deleteGrade){

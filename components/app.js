@@ -12,7 +12,8 @@ class App {
     console.error(error)
   }
   handleGetGradesSuccess(grades){
-    this.gradeTable.updateGrades(grades)
+    gradeData = grades
+    this.gradeTable.updateGrades()
     var gradeAverage = getAverage(grades)
     this.pageHeader.updateAverage(gradeAverage)
   }
@@ -72,6 +73,14 @@ class App {
   handleCreateGradeSuccess(){
     this.getGrades()
   }
+  deleteGradeFromArray(id){
+    for(var i = 0; i < gradeData.length; i++){
+      if(gradeData[i].id = id){
+        gradeData.splice(1, i)
+      }
+    }
+    this.gradeTable.updateGrades()
+  }
   deleteGrade(id) {
     $.ajax({
       headers: {
@@ -79,7 +88,7 @@ class App {
       },
       type: "DELETE",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
-      success: this.handleDeleteGradeSuccess,
+      success: this.deleteGradeFromArray(id),
       error: this.handleDeleteGradeError
     })
   }

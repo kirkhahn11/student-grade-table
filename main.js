@@ -4,6 +4,7 @@ var formElement = document.querySelector('.add-grade-form')
 var noGradesElement = document.querySelector('.no-grades')
 var updateElement = document.querySelector('.update-form')
 var dataArray = []
+var gradeData
 
 var addGradeForm = new AddGradeForm(formElement)
 
