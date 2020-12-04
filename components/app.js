@@ -2,8 +2,8 @@ function getAverage(grades){
   var total = 0
   for(var i = 0; i < grades.length; i++){
     total = total += grades[i].grade
-    var avg = total/grades.length
   }
+  var avg = total / grades.length
   return avg
 }
 
@@ -24,6 +24,9 @@ class App {
     this.createGrade = this.createGrade.bind(this)
     this.handleCreateGradeError = this.handleCreateGradeError.bind(this)
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this)
+    this.deleteGrade = this.deleteGrade.bind(this)
+    this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this)
+    this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this)
     this.pageHeader = pageHeader
     this.gradeForm = gradeForm
   }
@@ -41,6 +44,7 @@ class App {
   start(){
     this.getGrades()
     this.gradeForm.onSubmit(this.createGrade)
+    this.gradeTable.onDeleteClick(this.deleteGrade)
   }
   createGrade(name, course, grade) {
     $.ajax({
@@ -64,5 +68,22 @@ class App {
   handleCreateGradeSuccess(){
     this.getGrades()
 
+  }
+  deleteGrade(id) {
+    $.ajax({
+      headers: {
+        "X-Access-Token": "NUEI5rKm"
+      },
+      type: "DELETE",
+      url: "https://sgt.lfzprototypes.com/api/grades/" + id,
+      success: this.handleDeleteGradeSuccess,
+      error: this.handleDeleteGradeError
+    })
+  }
+  handleDeleteGradeError(error){
+    console.error(error)
+  }
+  handleDeleteGradeSuccess(){
+    this.getGrades()
   }
 }
