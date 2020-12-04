@@ -26,7 +26,6 @@ class App {
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this)
     this.deleteGrade = this.deleteGrade.bind(this)
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this)
-    this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this)
     this.pageHeader = pageHeader
     this.addGradeForm = addGradeForm
     this.updateGradeForm = updateGradeForm
@@ -93,15 +92,12 @@ class App {
       },
       type: "DELETE",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
-      success: this.deleteGradeSuccess(id),
+      success: this.deleteGradeSuccess,
       error: this.handleDeleteGradeError
     })
   }
   handleDeleteGradeError(error){
     console.error(error)
-  }
-  handleDeleteGradeSuccess(){
-    this.getGrades()
   }
   updateGrade(id, name, course, grade) {
     $.ajax({
