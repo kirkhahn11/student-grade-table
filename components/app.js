@@ -16,6 +16,7 @@ class App {
     var gradeAverage = getAverage(grades)
     this.pageHeader.updateAverage(gradeAverage)
   }
+  constructor(gradeTable, pageHeader, gradeForm, updateGradeForm) {
 
   constructor(gradeTable, pageHeader, gradeForm) {
     this.gradeTable = gradeTable
@@ -28,7 +29,11 @@ class App {
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this)
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this)
     this.pageHeader = pageHeader
-    this.gradeForm = gradeForm
+    this.addGradeForm = addGradeForm
+    this.updateGradeForm = updateGradeForm
+    this.handleUpdateGradeError = this.handleUpdateGradeError.bind(this)
+    this.handleUpdateGradeSuccess = this.handleUpdateGradeSuccess.bind(this)
+    this.updateGrade = this.updateGrade.bind(this)
   }
   getGrades(){
     $.ajax({
@@ -43,7 +48,8 @@ class App {
   }
   start(){
     this.getGrades()
-    this.gradeForm.onSubmit(this.createGrade)
+    this.addGradeForm.onSubmit(this.createGrade)
+    this.updateGradeForm.onSubmitUpdate(this.updateGrade)
     this.gradeTable.onDeleteClick(this.deleteGrade)
   }
   createGrade(name, course, grade) {
@@ -84,6 +90,28 @@ class App {
     console.error(error)
   }
   handleDeleteGradeSuccess(){
+    this.getGrades()
+  }
+  updateGrade(id, name, course, grade) {
+    $.ajax({
+      headers: {
+        "X-Access-Token": "NUEI5rKm"
+      },
+      type: "PATCH",
+      url: "https://sgt.lfzprototypes.com/api/grades/" + id,
+      data: {
+        name: name,
+        course: course,
+        grade: grade
+      },
+      success: this.handleUpdateGradeSuccess,
+      error: this.handleUpdateGradeError
+    })
+  }
+  handleUpdateGradeError(error){
+    console.error(error)
+  }
+  handleUpdateGradeSuccess(){
     this.getGrades()
   }
 }

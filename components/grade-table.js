@@ -1,7 +1,8 @@
 class GradeTable {
-  constructor(tableElement, noGradesElement) {
+  constructor(tableElement, noGradesElement, updateElement) {
     this.tableElement = tableElement
     this.noGradesElement = noGradesElement
+    this.updateElement = updateElement
   }
   updateGrades(grades) {
     var tbody = this.tableElement.querySelector('tbody')
@@ -22,6 +23,9 @@ class GradeTable {
   onDeleteClick(deleteGrade){
     this.deleteGrade = deleteGrade
   }
+  onUpdateClick(updateGrade){
+    this.updateGrade = updateGrade
+  }
   renderGradeRow(data, deleteGrade){
     var tr = document.createElement('tr')
     var tdName = document.createElement('td')
@@ -32,13 +36,30 @@ class GradeTable {
     tdGrade.textContent = data.grade
     var tdDelete = document.createElement('td')
     var deleteButton = document.createElement('button')
+    deleteButton.classList.add('btn-light' , 'btn-outline-danger', 'btn-sm', 'm-1')
     var deleteButtonText = document.createTextNode('Delete')
     deleteButton.addEventListener('click', function(){
       deleteGrade(data.id)
     })
     deleteButton.append(deleteButtonText)
-    tdDelete.append(deleteButton)
+    var updateButton = document.createElement('button')
+    updateButton.classList.add('btn-light', 'btn-outline-info', 'btn-sm', 'm-1')
+    var updateButtonText = document.createTextNode('Update')
+    updateButton.addEventListener('click', function() {
+      updateFormAppear(),
+      updateElement.elements.name.value = data.name
+      updateElement.elements.course.value = data.course
+      updateElement.elements.grade.value = data.grade
+      var dataId = data.id
+      dataArray.push(dataId)
+    })
+    updateButton.append(updateButtonText)
+    tdDelete.append(deleteButton, updateButton)
     tr.append(tdName, tdCourse, tdGrade, tdDelete)
     return tr
   }
+}
+function updateFormAppear() {
+  updateElement.classList.remove("d-none")
+  formElement.classList.add('d-none')
 }

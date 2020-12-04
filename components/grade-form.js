@@ -1,4 +1,4 @@
-class GradeForm {
+class AddGradeForm {
   constructor(formElement){
     this.formElement = formElement
     this.handleSubmit = this.handleSubmit.bind(this)
