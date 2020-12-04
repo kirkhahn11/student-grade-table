@@ -4,6 +4,9 @@ class GradeTable {
   }
   updateGrades(grades) {
     var tbody = this.tableElement.querySelector('tbody')
+    while(tbody.lastChild){
+      tbody.removeChild(tbody.lastChild)
+    }
     for(var i = 0; i < grades.length; i++){
       var tr = document.createElement('tr')
       var tdName = document.createElement('td')
