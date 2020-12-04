@@ -41,6 +41,7 @@ class GradeTable {
     var deleteButtonText = document.createTextNode('Delete')
     deleteButton.addEventListener('click', function(){
       deleteGrade(data.id)
+      deleteDataFromArray(data.id)
     })
     deleteButton.append(deleteButtonText)
     var updateButton = document.createElement('button')
@@ -60,7 +61,16 @@ class GradeTable {
     return tr
   }
 }
+
 function updateFormAppear() {
   updateElement.classList.remove("d-none")
   formElement.classList.add('d-none')
+}
+
+function deleteDataFromArray(id){
+  for (var i = 0; i < gradeData.length; i++) {
+    if (gradeData[i].id === id) {
+      gradeData.splice(i, 1)
+    }
+  }
 }

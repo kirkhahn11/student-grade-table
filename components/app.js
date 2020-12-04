@@ -26,6 +26,7 @@ class App {
     this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this)
     this.deleteGrade = this.deleteGrade.bind(this)
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this)
+    this.deleteGradeSuccess = this.deleteGradeSuccess.bind(this)
     this.pageHeader = pageHeader
     this.addGradeForm = addGradeForm
     this.updateGradeForm = updateGradeForm
@@ -75,12 +76,7 @@ class App {
     this.pageHeader.updateAverage(gradeAverage)
     this.gradeTable.updateGrades()
   }
-  deleteGradeSuccess(id){
-    for(var i = 0; i < gradeData.length; i++){
-      if(gradeData[i].id === id){
-        gradeData.splice(i, 1)
-      }
-    }
+  deleteGradeSuccess(){
     var gradeAverage = getAverage()
     this.pageHeader.updateAverage(gradeAverage)
     this.gradeTable.updateGrades()
@@ -111,19 +107,19 @@ class App {
         course: course,
         grade: grade
       },
-      success: this.handleUpdateGradeSuccess(id, name, course, grade),
+      success: this.handleUpdateGradeSuccess,
       error: this.handleUpdateGradeError
     })
   }
   handleUpdateGradeError(error){
     console.error(error)
   }
-  handleUpdateGradeSuccess(id, name, course, grade){
+  handleUpdateGradeSuccess(grades){
     for (var i = 0; i < gradeData.length; i++) {
-      if (gradeData[i].id.toString() === id) {
-        gradeData[i].name = name
-        gradeData[i].course = course
-        gradeData[i].grade = grade
+      if (gradeData[i].id === grades.id) {
+        gradeData[i].name = grades.name
+        gradeData[i].course = grades.course
+        gradeData[i].grade = grades.grade
       }
     }
     var gradeAverage = getAverage()
