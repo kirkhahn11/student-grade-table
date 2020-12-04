@@ -18,6 +18,8 @@ class App {
     this.pageHeader.updateAverage(gradeAverage)
   }
   constructor(gradeTable, pageHeader, gradeForm, updateGradeForm) {
+
+  constructor(gradeTable, pageHeader, gradeForm) {
     this.gradeTable = gradeTable
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this)
     this.handleGetGradesError = this.handleGetGradesError.bind(this)
@@ -85,6 +87,9 @@ class App {
     var gradeAverage = getAverage()
     this.pageHeader.updateAverage(gradeAverage)
     this.gradeTable.updateGrades()
+  handleCreateGradeSuccess(){
+    this.getGrades()
+
   }
   deleteGrade(id) {
     $.ajax({
