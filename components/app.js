@@ -16,6 +16,7 @@ class App {
     var gradeAverage = getAverage(grades)
     this.pageHeader.updateAverage(gradeAverage)
   }
+
   constructor(gradeTable, pageHeader, gradeForm) {
     this.gradeTable = gradeTable
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this)
@@ -62,5 +63,6 @@ class App {
   }
   handleCreateGradeSuccess(){
     this.getGrades()
+
   }
 }
